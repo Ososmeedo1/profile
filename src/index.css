@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'main';
+  src: url('./../public/fonts/main.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+
+body {
+  background-color: #080809;
+  overflow-x: hidden;
+}
+
+@theme {
+  --font-main: main
+}
+
+::selection {
+  @apply bg-green-600 text-yellow-400
+}
+
+
+
+
