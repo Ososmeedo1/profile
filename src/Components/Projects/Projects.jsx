@@ -1,139 +1,96 @@
-import React, { useRef } from 'react'
-import ecommerce from './../../../public/images/ecommerce.png'
-import notice from './../../../public/images/notice.png'
-import weather from './../../../public/images/weather.png'
-import food from './../../../public/images/food.png'
-import restaurant from './../../../public/images/restaurant.png'
-import { Link } from 'react-router-dom'
-import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import { ScrollTrigger } from 'gsap/all'
+import React, { useState, useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import ProjectCard from '../ProjectCard/ProjectCard';
+import { projects, categories } from '../../data/projects';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Projects() {
+  const [activeCategory, setActiveCategory] = useState('All');
+  const containerRef = useRef(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
-  const portfolio = useRef();
-  const ecommerceSection = useRef();
-  const notes = useRef();
-  const recipes = useRef();
-  const weatherSection = useRef();
-  const restaurant = useRef();
-
-
-  gsap.registerPlugin(useGSAP)
+  const filteredProjects = activeCategory === 'All'
+    ? projects
+    : projects.filter(p => p.category === activeCategory);
 
   useGSAP(() => {
-  gsap.registerPlugin(ScrollTrigger);
+    if (prefersReducedMotion) return;
 
-  gsap.from(ecommerceSection.current, {
-    x: -600,
-    opcaity: 0,
-    ease: "none",
-    scrollTrigger: {
-      trigger: portfolio.current,
-      start: "top top",
-      end: "+=500px",
-      // start: "top center",
-      // end: "start center-=200px",
-      pin: true,
-      // start: "top-=600px center-=200px",
-      // end: "end top",
-      scrub: true,
-      markers: true
-    }
-  })
-  
-  })
+    // Kill any existing animations on the cards to reset
+    gsap.killTweensOf('.project-card');
 
-  return <>
-    <section className='text-white py-20' ref={portfolio}>
-      <div className="title flex flex-col items-center mb-16">
-        <h4 className='border rounded-4xl px-3 py-1 bg-[#1E1E1E] font-main mb-5'>Portfolio</h4>
-        <h2 className='capitalize text-6xl bg-linear-to-r from-neutral-300 to-neutral-50 bg-clip-text text-transparent text-center mt-5'>My latest projects</h2>
-      </div>
-      <div className="projects flex flex-wrap mx-auto md:container mb-5">
+    // Animate cards when they enter viewport or when filter changes
+    gsap.fromTo('.project-card',
+      { y: 30, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
+        }
+      }
+    );
 
-        <Link ref={ecommerceSection} className="sm:w-full max-sm:w-full flex flex-col items-center md:w-1/2 h-[400px]" to={'https://ososmeedo22.netlify.app'} target='_blank'>
+  }, { scope: containerRef, dependencies: [activeCategory, prefersReducedMotion] });
 
-          <div className="layout w-10/12 h-11/12  bg-[#0E0E0E] border border-neutral-800 rounded-2xl relative group">
+  return (
+    <div className="w-full max-w-7xl mx-auto px-4" ref={containerRef}>
+      <div className="flex flex-col items-center mb-16 space-y-8">
+        <h2 className="text-3xl md:text-5xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-zinc-900 via-zinc-700 to-zinc-500 dark:from-zinc-100 dark:via-zinc-400 dark:to-zinc-600">
+          Featured Projects
+        </h2>
 
-            <div className="image absolute top-0 right-0 left-0 bottom-0 opacity-0 transition-all duration-700 group-hover:opacity-100">
-              <img src={ecommerce} className='w-full h-full rounded-2xl opacity-20 object-cover' alt="" />
-            </div>
-
-            <div className="project-title absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-              <h2 className='text-4xl lg:text-6xl opacity-100 text-neutral-600 font-extrabold transition-all duration-300 group-hover:text-green-500 group-hover:scale-150'>Ecommerce</h2>
-            </div>
-
-          </div>
-
-        </Link>
-
-        <Link ref={notes} className="sm:w-full max-sm:w-full flex flex-col items-center md:w-1/2 h-[400px]" to={'https://ososmeedo.netlify.app'} target='_blank'>
-
-          <div className="layout w-10/12 h-11/12  bg-[#0E0E0E] border border-neutral-800 rounded-2xl relative group">
-
-            <div className="image absolute top-0 right-0 left-0 bottom-0 opacity-0 transition-all duration-700 group-hover:opacity-100">
-              <img src={notice} className='w-full h-full rounded-2xl opacity-20 object-cover' alt="" />
-            </div>
-
-            <div className="project-title text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-              <h2 className='text-4xl lg:text-6xl opacity-100 text-neutral-600 font-extrabold transition-all duration-300 group-hover:text-blue-400 group-hover:scale-150'>Notes project</h2>
-            </div>
-
-          </div>
-
-        </Link>
-
-        <Link ref={weatherSection} className="sm:w-full max-sm:w-full flex flex-col items-center md:w-1/2 h-[400px]" to={'https://ososmeedo1.github.io/weather-project'} target='_blank'>
-
-          <div className="layout w-10/12 h-11/12  bg-[#0E0E0E] border border-neutral-800 rounded-2xl relative group">
-
-            <div className="image absolute top-0 right-0 left-0 bottom-0 opacity-0 transition-all duration-700 group-hover:opacity-100">
-              <img src={weather} className='w-full h-full rounded-2xl opacity-20 object-cover' alt="" />
-            </div>
-
-            <div className="project-title text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-              <h2 className='text-4xl lg:text-6xl opacity-100 text-neutral-600 font-extrabold transition-all duration-300 group-hover:text-slate-200 group-hover:scale-150'>Weather</h2>
-            </div>
-
-          </div>
-
-        </Link>
-
-        <Link ref={recipes} className="sm:w-full max-sm:w-full flex flex-col items-center md:w-1/2 h-[400px]" to={'https://ososmeedo1.github.io/food'} target='_blank'>
-
-          <div className="layout w-10/12 h-11/12  bg-[#0E0E0E] border border-neutral-800 rounded-2xl relative group">
-
-            <div className="image absolute top-0 right-0 left-0 bottom-0 opacity-0 transition-all duration-700 group-hover:opacity-100">
-              <img src={food} className='w-full h-full rounded-2xl opacity-20 object-cover' alt="" />
-            </div>
-
-            <div className="project-title text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-              <h2 className='text-4xl lg:text-6xl opacity-100 text-neutral-600 font-extrabold transition-all duration-300 group-hover:text-yellow-400 group-hover:scale-150'>Food Recipes</h2>
-            </div>
-
-          </div>
-
-        </Link>
-
-        <Link ref={restaurant} className="w-full flex flex-col items-center h-[400px]" to={'https://restaurant22.netlify.app'} target='_blank'>
-
-          <div className="layout max-sm:w-10/12 sm:w-10/12 md:w-11/12 h-11/12  bg-[#0E0E0E] border border-neutral-800 rounded-2xl relative group">
-
-            <div className="image absolute top-0 right-0 left-0 bottom-0 opacity-0 transition-all duration-700 group-hover:opacity-100">
-              <img src={restaurant} className='w-full h-full rounded-2xl opacity-20 object-cover' alt="" />
-            </div>
-
-            <div className="project-title text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-              <h2 className='text-4xl lg:text-6xl opacity-100 text-neutral-600 font-extrabold transition-all duration-300 group-hover:text-red-500 group-hover:scale-150'>Restaurant</h2>
-            </div>
-
-          </div>
-
-        </Link>
-
+        {/* Filter Pills */}
+        <div className="flex flex-wrap gap-3 justify-center">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === cat
+                  ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-lg transform scale-105'
+                  : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-700 hover:shadow-sm'
+                }`}
+              aria-pressed={activeCategory === cat}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
       </div>
 
-    </section>
-  </>
+      {/* Projects Grid */}
+      <div className="min-h-[400px]">
+        {filteredProjects.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredProjects.map((project) => (
+              <div key={project.id} className="project-card">
+                <ProjectCard project={project} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center h-64 text-center animate-in fade-in zoom-in duration-300">
+            <p className="text-xl text-zinc-500 dark:text-zinc-400 mb-4">
+              No projects found in this category.
+            </p>
+            <button
+              onClick={() => setActiveCategory('All')}
+              className="px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded transition-colors"
+            >
+              Clear Filter
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
