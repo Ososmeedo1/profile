@@ -6,7 +6,7 @@ export const projects = [
     descriptionEn: 'E-commerce model (un-real)',
     descriptionAr: 'نموذج متجر إلكتروني (غير حقيقي).',
     category: 'Frontend',
-    image: './../../public/images/ecommerce.png',
+    image: '/images/ecommerce.png',
     demoUrl: 'https://ososmeedo22.netlify.app',
     codeUrl: 'https://github.com/Ososmeedo1/ecommerce',
     featured: true
@@ -18,7 +18,7 @@ export const projects = [
     descriptionEn: 'Simple task management app',
     descriptionAr: 'تطبيق بسيط لإدارة المهام',
     category: 'Frontend',
-    image: './../../public/images/notice.png',
+    image: '/images/notice.png',
     demoUrl: 'https://ososmeedo.netlify.app',
     codeUrl: 'https://github.com/Ososmeedo1/notes',
     featured: true
@@ -30,7 +30,7 @@ export const projects = [
     descriptionEn: 'E-commerce backend APIs made with Node.js, Express, and MongoDB. Including user authentication, product management, coupons, brands, categories, subCategories and order processing.',
     descriptionAr: 'نظام للمتجر اﻹكتروني للواجهة الخلفية',
     category: 'Backend',
-    image: './../../public/images/ecommerceAPI.png',
+    image: '/images/ecommerceAPI.png',
     demoUrl: 'https://ososmeedo1.github.io/e-commerce-backend-doc',
     codeUrl: 'https://github.com/Ososmeedo1/ecommerce-backend',
     featured: true
@@ -42,7 +42,7 @@ export const projects = [
     descriptionEn: 'Real-time weather application using external APIs',
     descriptionAr: 'مشروع لعرض بيانات الطقس',
     category: 'Frontend',
-    image: './../../public/images/weather.png',
+    image: '/images/weather.png',
     demoUrl: 'https://ososmeedo1.github.io/weather-project',
     codeUrl: 'https://github.com/Ososmeedo1/weather-project',
     featured: false
@@ -54,7 +54,7 @@ export const projects = [
     descriptionEn: 'Project for food recipes using pure HTML, CSS, and JavaScript.',
     descriptionAr: 'موقع لعرض وصفات اﻷكل بإستخدام نظام واجهة خلفية خارجي',
     category: 'Frontend',
-    image: './../../public/images/food.png',
+    image: '/images/food.png',
     demoUrl: 'https://ososmeedo1.github.io/food',
     codeUrl: 'https://github.com/Ososmeedo1/food',
     featured: false
@@ -66,7 +66,7 @@ export const projects = [
     descriptionEn: 'Simple restaurant website UI project',
     descriptionAr: 'مشروع واجهة مستخدم بسيطة لموقع مطعم',
     category: 'Frontend',
-    image: './../../public/images/restaurant.png',
+    image: '/images/restaurant.png',
     demoUrl: 'https://restaurant22.netlify.app',
     codeUrl: 'https://github.com/Ososmeedo1/Restaurant',
     featured: false
@@ -78,7 +78,7 @@ export const projects = [
     descriptionEn: 'Backend APIs for a job-search application using Node.js, Express, Mongoose and MongoDB.',
     descriptionAr: 'نظام واجهة خلفية للبحث عن الوظائف باستخدام Node.js, Express, Mongoose و MongoDB.',
     category: 'Backend',
-    image: './../../public/images/job-search.png',
+    image: '/images/job-search.png',
     demoUrl: 'https://ososmeedo1.github.io/Job-search-doc',
     codeUrl: 'https://github.com/Ososmeedo1/job-search-backend',
     featured: true
@@ -90,7 +90,7 @@ export const projects = [
     descriptionEn: 'Simple library management system using Node.js, Express, and MongoDB.',
     descriptionAr: 'نظام بسيط لإدارة المكتبة باستخدام Node.js, Express, و MongoDB.',
     category: 'Backend',
-    image: "./../../public/images/library.png",
+    image: '/images/library.png',
     demoUrl: 'https://example.com',
     codeUrl: 'https://github.com/Ososmeedo1/library',
     featured: false
