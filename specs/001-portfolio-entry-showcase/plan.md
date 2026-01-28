@@ -52,110 +52,116 @@ specs/001-portfolio-entry-showcase/
 ```
 src/
 ├── components/          # Reuse existing patterns; add new functional components
-├── data/                # Static data (projects, certificates)
-├── hooks/               # Theme hook if present (or implement locally)
-├── pages/ or App.tsx    # Main composition
-└── assets/              # Local images/placeholders (no CDNs)
+# Implementation Plan: Portfolio Enhancements – Icons, Fonts, Language UI, SEO & Skills
+
+**Branch**: `[001-portfolio-enhancements]` | **Date**: 2026-01-26 | **Spec**: specs/001-portfolio-entry-showcase/spec.md
+**Input**: Plan prompt “Portfolio Enhancements Plan – Icons, Fonts, Language UI, SEO & Skills”
+
+## Summary
+
+Implement UI polish across icons, typography, language toggle, SEO titles, and About-page skills while preserving the existing layout, Tailwind utility styling, lucide-only icons, GSAP animations, and RTL/LTR behavior. Self-host Arabic fonts, swap platform-specific icons with generic lucide choices, add per-route page titles with Helmet, and expand skills data without disrupting responsiveness.
+
+## Technical Context
+
+**Language/Version**: React 18 + Vite + JavaScript; TailwindCSS
+**Primary Dependencies**: react-router-dom, tailwindcss, lucide-react, gsap; planned addition: react-helmet-async
+**Storage**: N/A (static JSON-like data for projects/socials/skills; localStorage for theme and language)
+**Testing**: Manual functional smoke tests; no automated test suite present
+**Target Platform**: Modern browsers (desktop/tablet/mobile)
+**Project Type**: Single-page application portfolio
+**Performance Goals**: No regressions to current load; font loading stays non-blocking (WOFF2 first); icon swaps do not increase bundle; Helmet titles update without route lag
+**Constraints**: Tailwind-only styling; GSAP-only animations; lucide-only icons; SPA routing via react-router-dom; no CDNs/external assets; local font hosting; minimal deps (justify Helmet)
+**Scale/Scope**: Single personal portfolio site (handful of pages/components)
+
+## Constitution Check (Pre-Design)
+
+- UI Preservation (NON-NEGOTIABLE): Keep existing layouts/spacing/typography patterns intact; no redesign.
+- Tailwind-Only Styling: Continue using Tailwind utility classes; avoid custom CSS beyond font-face definitions.
+- SPA + react-router-dom (NON-NEGOTIABLE): Maintain client routing; no full reloads.
+- Bilingual + RTL/LTR (NON-NEGOTIABLE): Preserve LanguageContext toggle, `dir`/`lang` attributes, and localized strings.
+- GSAP-Only Animations: Leave existing GSAP usage untouched; no new animation libs.
+- Lucide-Only Icons: All icon swaps (code link, language toggle) must use lucide-react.
+- Minimal Dependencies / Local Assets (NON-NEGOTIABLE): New dependency only for Helmet; fonts self-hosted (WOFF2/WOFF); no CDNs.
+- Performance/SEO/Responsive: No layout shifts; maintain contrast; semantic headings and links; mobile-first spacing.
+Status: Gates pass with attention on dependency addition (Helmet) and font hosting to keep bundle lean.
+
+## Project Structure
+
+### Documentation (this feature)
+
+```text
+specs/001-portfolio-entry-showcase/
+├── plan.md              # this file
+├── spec.md
+├── checklists/
+├── research.md          # Phase 0 output
+├── data-model.md        # Phase 1 output
+├── quickstart.md        # Phase 1 output
+└── contracts/           # Phase 1 output
 ```
 
-**Structure Decision**: Single-page web app; add components under src/components and static data under src/data to match existing conventions.
+### Source Code (repository root)
+
+```text
+src/
+├── App.jsx
+├── main.jsx
+├── index.css
+├── data/               # projects, certificates, socials, identity
+├── context/LanguageContext.jsx
+├── hooks/useTheme.js
+├── Components/         # Nav, ThemeToggle, ProjectCard, etc.
+├── pages/              # Home, About, Projects, Contact
+└── lib/gsap.js
+
+public/
+└── fonts/              # main.ttf (existing); add PlaypenSansArabic, Zain (WOFF2/WOFF)
+```
+
+**Structure Decision**: SPA with shared data under `src/data`, shared providers/hooks under `src/context` and `src/hooks`, and page-level routes in `src/pages`; static assets (fonts) in `public/fonts` for local hosting.
 
 ## Complexity Tracking
 
-No constitution violations; minimal-change approach.
+| Violation | Why Needed | Simpler Alternative Rejected Because |
+|-----------|------------|---------------------------------------|
+| Add react-helmet-async (Minimal Dependencies) | Required to set per-route titles for SEO within SPA | Manual `document.title` updates risk drift, race conditions, and duplicated logic across pages |
 
-## Component Breakdown
+## Phase 0 – Research Tasks (Resolved in research.md)
 
-- `LoadingScreen`: Full-screen minimal loader; GSAP intro/outro; waits for critical readiness.
-- `Navbar`: Links to sections (About, Projects, Certificates, Contact); theme toggle (Lucide icons); responsive layout.
-- `ProjectsSection`: Renders filters and grid of `ProjectCard` items; manages filtered list.
-- `ProjectCard`: Shows name, category, demo/code links, image/placeholder; GSAP scroll animation; light/dark styles.
-- `AboutSection`: Short profile text; semantic section.
-- `CertificatesSection`: Grid/list of certificate placeholders/links; responsive.
-- `ContactSection`: Name, email, social links; semantic forms/links.
-- `Footer`: Name, contact info; consistent spacing; light/dark ready.
-- `ThemeToggle`: (If split) encapsulates theme button using Lucide Sun/Moon; consumes theme state.
-- `Layout`/`Main`: Composes sections, applies theme class, hosts loader.
+- Choose a generic lucide icon for project code links (replace GitHub mark).
+- Pick a lucide icon that visually communicates bilingual (Arabic/English) for the language toggle.
+- Determine local hosting approach and formats for Playpen Sans Arabic and Zain fonts without CDNs.
+- Select Helmet package variant (react-helmet vs react-helmet-async) suitable for React 18 SPA.
 
-## State & Data Management
+## Phase 1 – Design & Contracts Plan
 
-- Projects data: static array (name, category, demoLink, codeLink, imageSrc?, description?). Store in `src/data/projects.ts`. Categories: "All", "Frontend", "Backend".
-- Filtering: `useState` for activeCategory; derived filtered list via `useMemo` or inline filter; default "All".
-- Theme: `useState`/`useEffect` with localStorage key (e.g., `theme`); initialize from system prefers-color-scheme; apply root `classList` (`dark`). Expose via context or top-level hook; keep minimal.
-- Loading readiness: trigger loader exit after main content/images/data ready; optionally `useEffect` with `Promise.all` of image preloads; ensure timeout fallback to avoid hang.
+- Icons
+  - Swap project card code link to lucide `Code2` (or equivalent) while leaving demo link icon unchanged.
+  - Replace language toggle icon with lucide `Languages`, ensuring visibility in light/dark and consistent sizing across desktop/mobile.
+- Typography
+  - Download Playpen Sans Arabic and Zain (WOFF2 + WOFF) into `public/fonts`; register via `@font-face` in `src/index.css`.
+  - Extend Tailwind font families for English vs Arabic; apply via a language-aware wrapper class so all pages/components inherit correctly.
+- Social CTA Cleanup
+  - Remove `ctaEn`/`ctaAr` from `src/data/socials.js`; verify renderers use `name`/`display` only and keep link behavior intact.
+- Page Titles & SEO
+  - Install and wrap app with `HelmetProvider`; add per-page `<Helmet>` titles that respect language toggle.
+  - Provide a shared helper/hook to derive localized titles to avoid duplication and keep SPA behavior intact.
+- Skills Expansion (About page)
+  - Introduce structured skills data (group label + skill entries) supporting EN/AR labels; render as text/badges with responsive wrapping.
+  - Keep section lightweight (no icons), RTL-friendly, and consistent with existing spacing.
+- Component/Data Responsibility
+  - Fonts/typography: `index.css` + Tailwind config; language toggle UI: `Components/Nav` + `LanguageContext`; page titles: pages + shared Helmet helper; project link icons: `Components/ProjectCard`; skills data: new `src/data/skills.js` consumed by `pages/About`.
+- Contracts
+  - Document that no external APIs are introduced; interactions remain client-side. Provide a stub OpenAPI file noting absence of network endpoints for this feature.
 
-## Styling Approach
+## Phase 2 – Build & QA Plan (to execute after design sign-off)
 
-- Tailwind utilities only; reuse existing spacing/typography patterns.
-- Responsive: use `sm/md/lg/xl/2xl` for grids (Projects/Certs), nav layout, padding.
-- Dark mode: Tailwind `dark:` variants on backgrounds, text, borders; ensure contrast for links/buttons.
-- Cards: consistent shadow/border radius per existing patterns; placeholders for missing images.
+- Implement icon swaps and social data cleanup; verify navigation, filters, and link targets remain unchanged.
+- Add fonts to `public/fonts`, register in CSS, and apply language-specific font families; smoke test Arabic/English rendering and responsiveness.
+- Integrate Helmet provider and localized titles per route; confirm titles update on route/language change without reload.
+- Add skills data + UI to About; test RTL/LTR, mobile wrapping, and minimal styling.
+- Regression pass: theme toggle, language toggle, GSAP animations, responsiveness (sm–2xl), and performance (no blocking font loads).
 
-## Animations (GSAP-only)
+## Constitution Check (Post-Design)
 
-- Loading Screen: GSAP timeline for fade/scale; exit triggers when ready flag set; ensure `display` removal after animation.
-- Navbar/Sections: On load, subtle fade/slide for header; use `prefers-reduced-motion` check to skip.
-- Project Cards: GSAP + ScrollTrigger for staggered fade/translate; guard for reduced motion; no layout shift (use transform/opacity only).
-- Smooth Scroll: Use native `scrollBehavior: 'smooth'` or GSAP ScrollToPlugin (already in gsap package) without new deps.
-- Performance: Avoid animating layout properties; kill ScrollTriggers on unmount.
-
-## SEO & Accessibility
-
-- Semantics: `<header>` for navbar, `<main>` for sections, `<section>` with `aria-label` for About/Projects/Certificates/Contact, `<footer>` for footer, `<article>` for project cards.
-- Headings: Maintain hierarchy (h1 for hero/brand, h2 for sections, h3 for card titles).
-- Images: `alt` text or placeholder label; avoid empty alt unless decorative.
-- Nav: `aria-label` on nav; focus styles maintained; links use `rel="noreferrer"` when opening new tabs.
-- Reduced motion: honor `prefers-reduced-motion` and provide non-animated visibility.
-
-## Technical Constraints
-
-- React functional components only; keep functions small.
-- Tailwind CSS for styling; no custom CSS files; no inline styles unless unavoidable.
-- GSAP for all animations (core + ScrollTrigger/ScrollTo from gsap package only).
-- Lucide React for all icons (theme toggle, nav if needed).
-- No extra dependencies or CDNs; use local assets/placeholders.
-- Code must remain simple, organized, intentionally commented for non-obvious logic.
-
-## Step-by-Step Implementation Plan
-
-1) **Baseline & Theme State**
-   - Add theme hook/context with localStorage + system preference fallback; apply `document.documentElement.classList` for `dark`.
-   - Prepare reduced-motion flag helper for animations.
-
-2) **Loading Screen**
-   - Implement `LoadingScreen` with minimal Tailwind styling; GSAP intro/outro timeline; exit when `contentReady` flag true with timeout safeguard.
-   - Integrate in App/Layout; gate main content visibility until loader exit sequence starts.
-
-3) **Layout & Navbar**
-   - Build `Navbar` with links (About, Projects, Certificates, Contact) and `ThemeToggle` (Lucide Sun/Moon); sticky/top spacing per existing patterns.
-   - Wire smooth scroll (native or GSAP ScrollTo); ensure focus/keyboard support.
-
-4) **Sections**
-   - About: concise text block; responsive spacing.
-   - Projects: static data source; category pill buttons (All/Frontend/Backend); filtered render; empty state.
-   - ProjectCard: name, category badge, demo/code links (new tab), image/placeholder; Tailwind for light/dark; GSAP ScrollTrigger for reveal.
-   - Certificates: placeholder grid/list with responsive wrapping; optional links/images.
-   - Contact: name/email/social links; semantic markup; responsive columns/stack.
-
-5) **Footer**
-   - Minimal footer with name/contact; light/dark variants; consistent padding.
-
-6) **Animations Integration**
-   - Register ScrollTrigger/ScrollTo once; create reusable hook/helper for card reveals and section fade-ins; no layout-shifting transforms.
-   - Honor reduced motion by skipping timelines and setting end states instantly.
-
-7) **Responsive & SEO Pass**
-   - Verify layouts at sm/md/lg/xl/2xl; ensure no horizontal scroll; check tab order.
-   - Confirm headings hierarchy, aria labels, alt text, and link semantics.
-
-8) **Performance & Clean-up**
-   - Ensure animations are killed on unmount; avoid unnecessary re-renders (memoize static data).
-   - Verify bundle has no new deps; ensure no CDN usage; images local/placeholders.
-
-## Success Criteria
-
-- Modular components (loader, navbar, sections, cards, footer) are reusable and clear.
-- Project filtering works correctly for All/Frontend/Backend with empty state handled.
-- GSAP animations are smooth, subtle, non-blocking, and respect reduced motion; no layout shift.
-- Light/dark mode applies across all sections and persists user choice.
-- Performance, responsiveness, and SEO remain uncompromised; semantic markup with proper headings and alt text.
+All gates remain satisfied with planned changes: UI/layout preserved; Tailwind utilities remain primary styling; SPA routing unchanged; bilingual support enhanced via fonts/icon only; GSAP untouched; lucide-only icons enforced; new dependency limited to react-helmet-async; assets fully local; responsiveness/SEO kept in scope.

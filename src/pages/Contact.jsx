@@ -1,14 +1,21 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '../context/LanguageContext';
 import { socials } from '../data/socials';
 import { identity } from '../data/identity';
 import { ExternalLink } from 'lucide-react';
+import { getPageTitle } from '../lib/head';
 
 export default function Contact() {
   const { language } = useLanguage();
+  const pageTitle = getPageTitle('contact', language);
 
   return (
     <div className="container mx-auto px-4 py-8 animate-in fade-in duration-500 max-w-3xl">
+      <Helmet>
+        <title>{pageTitle}</title>
+      </Helmet>
+
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-zinc-900 dark:text-zinc-50">
           {language === 'ar' ? 'تواصل معي' : 'Get in Touch'}

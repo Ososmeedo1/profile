@@ -1,12 +1,12 @@
 ---
 
-description: "Tasks for Portfolio Website Entry & Project Showcase"
+description: "Tasks for Portfolio Enhancements – Icons, Fonts, Language UI, SEO & Skills"
 ---
 
-# Tasks: Portfolio Website Entry & Project Showcase
+# Tasks: Portfolio Enhancements – Icons, Fonts, Language UI, SEO & Skills
 
-**Input**: Design documents from `specs/001-portfolio-entry-showcase/`
-**Prerequisites**: plan.md (required), spec.md (required), research.md (optional), data-model.md (optional), contracts/ (optional)
+**Input**: Design documents from /specs/001-portfolio-entry-showcase/
+**Prerequisites**: plan.md (required), spec.md (required), research.md, data-model.md, contracts/
 
 ## Format: `[ID] [P?] [Story] Description`
 
@@ -18,89 +18,109 @@ description: "Tasks for Portfolio Website Entry & Project Showcase"
 
 ## Phase 1: Setup (Shared Infrastructure)
 
-**Purpose**: Ensure environment, dependencies, and baseline configuration respect the constitution.
-
-- [x] T001 Verify dependencies (tailwindcss, gsap, lucide-react) present; remove unused packages in package.json
-- [x] T002 Confirm Tailwind dark mode config uses `class` strategy in tailwind.config.js
-- [x] T003 Ensure root entry (src/main.tsx or src/main.jsx) applies Tailwind base styles and can host theme class on `document.documentElement`
+- [X] T001 Add react-helmet-async dependency to package.json and install (root package.json, package-lock.json)
+- [X] T002 [P] Place Playpen Sans Arabic (400,700) and Zain (400) font files as WOFF2+WOFF under public/fonts/
 
 ---
 
 ## Phase 2: Foundational (Blocking Prerequisites)
 
-**Purpose**: Core state, data, and utilities required before any user story work.
+**Purpose**: Core groundwork for typography, head management, and language-aware rendering
 
-- [x] T004 Create theme hook/context with localStorage + system fallback in src/hooks/useTheme.ts
-- [x] T005 Add reduced-motion helper (prefers-reduced-motion) in src/hooks/usePrefersReducedMotion.ts
-- [x] T006 Create projects data source with category tags and local placeholders in src/data/projects.ts
-- [x] T007 Scaffold semantic layout shell with section anchors (About, Projects, Certificates, Contact) in src/App.tsx
-- [x] T008 Register GSAP core + ScrollTrigger/ScrollTo helper in src/lib/gsap.ts
+- [X] T003 Register @font-face entries for Playpen Sans Arabic and Zain in src/index.css with WOFF2 primary and WOFF fallback sources
+- [X] T004 Update tailwind.config.js to add font families for main and arabic stacks
+- [X] T005 Apply language-based font family selection on the app shell in src/App.jsx to switch Arabic vs English fonts
+- [X] T006 Wrap the app with HelmetProvider in src/main.jsx and add localized page meta map in src/data/pageMeta.js
+- [X] T007 [P] Add a small helper to set page titles from pageMeta (create src/lib/head.js) for reuse across pages
+
+**Checkpoint**: Foundation ready — user story phases can proceed
 
 ---
 
 ## Phase 3: User Story 1 - Seamless Entry & Navigation (Priority: P1) 🎯 MVP
 
-**Goal**: Users see a minimal loading screen, then navigate via navbar to all sections with smooth scroll.
-**Independent Test**: Load site (mobile/desktop); loader exits when content ready; navbar links smooth-scroll to each section without layout shift.
+**Goal**: Preserve fast entry and clean navigation while updating language UI and keeping socials intact
 
-- [x] T009 [US1] Implement LoadingScreen component with GSAP intro/outro in src/components/LoadingScreen.tsx
-- [x] T010 [US1] Gate main render with loader ready flag and remove loader after animation in src/App.tsx
-- [x] T011 [P] [US1] Build Navbar with section links (About, Projects, Certificates, Contact) in src/components/Navbar.tsx
-- [x] T012 [P] [US1] Add smooth scroll behavior using GSAP ScrollTo (or native) in src/components/Navbar.tsx
-- [x] T013 [P] [US1] Add basic About/Certificates/Contact section content blocks with semantic tags in src/components/AboutSection.tsx, src/components/CertificatesSection.tsx, src/components/ContactSection.tsx
+**Independent Test**: Load Home on mobile/desktop; verify language toggle uses the new icon, page titles localize with language, nav links still work, and social links open correctly.
+
+### Implementation
+
+- [X] T008 [US1] Replace language toggle icon with lucide Languages and ensure light/dark contrast in src/Components/Nav/Nav.jsx
+- [X] T009 [P] [US1] Add localized Helmet title for Home route using head helper in src/pages/Home.jsx
+- [X] T010 [P] [US1] Add localized Helmet title for About route using head helper in src/pages/About.jsx
+- [X] T011 [US1] Remove ctaEn/ctaAr fields from social data and adjust any references in src/data/socials.js (render with name/display only)
+
+**Checkpoint**: Entry/nav experience updated with bilingual icon and localized titles
 
 ---
 
 ## Phase 4: User Story 2 - Browse & Filter Projects (Priority: P2)
 
-**Goal**: Users filter projects by category and open demo/code links from cards.
-**Independent Test**: Select each category (All/Frontend/Backend) and verify only matching projects render; demo/code links open correctly.
+**Goal**: Keep project exploration smooth while using platform-agnostic code icons and SEO titles
 
-- [x] T014 [P] [US2] Create ProjectCard with name, category badge, demo/code links, image/placeholder in src/components/ProjectCard.tsx
-- [x] T015 [P] [US2] Implement ProjectsSection with filter pills (All/Frontend/Backend) and derived filtered list in src/components/ProjectsSection.tsx
-- [x] T016 [P] [US2] Add GSAP ScrollTrigger stagger reveal for project cards with reduced-motion guard in src/components/ProjectsSection.tsx
-- [x] T017 [P] [US2] Handle empty-category state with layout-preserving placeholder in src/components/ProjectsSection.tsx
-- [x] T018 [US2] Wire ProjectsSection into main layout with data import; ensure demo/code links open in new tabs in src/App.tsx
+**Independent Test**: Open Projects, switch filters, ensure cards render; code links show a generic code icon, open in new tab, and the page title matches the selected language.
+
+### Implementation
+
+- [X] T012 [US2] Swap project code link icon to lucide Code2 with accessible label in src/Components/ProjectCard/ProjectCard.jsx
+- [X] T013 [P] [US2] Add localized Helmet title for Projects route using head helper in src/pages/Projects.jsx
+- [X] T014 [US2] Ensure project link styling remains consistent after icon swap in src/Components/ProjectCard/ProjectCard.jsx (hover, dark mode, spacing)
+
+**Checkpoint**: Projects grid shows generic code icons and localized title while filters continue to work
 
 ---
 
 ## Phase 5: User Story 3 - Light/Dark Mode Toggle (Priority: P3)
 
-**Goal**: Users toggle light/dark themes; choice persists and applies across all sections.
-**Independent Test**: Toggle theme and verify all sections/cards/footer swap palettes without layout shift; reload preserves selection.
+**Goal**: Expand About skills and ensure new UI respects theme and language direction
 
-- [x] T019 [P] [US3] Implement ThemeToggle using Lucide Sun/Moon and theme hook in src/components/ThemeToggle.tsx
-- [x] T020 [US3] Apply light/dark Tailwind variants across Navbar, LoadingScreen, ProjectsSection, About/Certificates/Contact, Footer in their component files
-- [x] T021 [P] [US3] Persist and hydrate theme before paint (localStorage + system fallback) in src/hooks/useTheme.ts
-- [x] T022 [US3] Ensure images/placeholders and badges remain legible in dark mode in src/data/projects.ts and ProjectCard styling
+**Independent Test**: Toggle light/dark after loading About; verify skills badges wrap responsively, use correct language text, and contrast stays readable; page title updates with language.
 
----
+### Implementation
 
-## Final Phase: Polish & Cross-Cutting
+- [X] T015 [US3] Create skills data groups with EN/AR labels in src/data/skills.js (Frontend/Core, Styling, Backend/Databases, Validation/ORM/Testing, Tools)
+- [X] T016 [US3] Render skills section from skills data with responsive badges and RTL/dark support in src/pages/About.jsx
+- [X] T017 [P] [US3] Add localized Helmet title for Contact route using head helper in src/pages/Contact.jsx
+- [X] T018 [US3] Align new skills and language toggle styles with theme state to maintain contrast in src/pages/About.jsx and src/Components/Nav/Nav.jsx
 
-- [x] T023 Verify semantic structure (header/main/section/article/footer), heading hierarchy, and aria-labels; add alt text for images in component files
-- [x] T024 Validate reduced-motion path: skip GSAP timelines and set end states when prefers-reduced-motion is true across components
-- [x] T025 Audit dependencies and assets: no CDNs/external links; remove unused packages in package.json; ensure Lucide-only icons
-- [x] T026 Responsive/UX pass at sm/md/lg/xl/2xl: no horizontal scroll; spacing and scroll targets remain accurate in src/App.tsx and components
+**Checkpoint**: Theme toggle continues to work with new skills content and localized titles
 
 ---
 
-## Dependencies
+## Phase N: Polish & Cross-Cutting Concerns
 
-- Complete Phase 2 before any User Story work.
-- Story order: US1 (navigation/loading) → US2 (projects filtering) → US3 (theme toggle).
-- Within US phases, [P] items can run in parallel when touching different files.
+- [ ] T019 [P] Run quickstart validation steps (npm install, npm run dev smoke) and confirm fonts load from public/fonts
+- [ ] T020 Audit RTL/LTR and dark/light behavior for nav, projects, and skills updates across src/Components and src/pages
 
-## Parallel Execution Examples
+---
 
-- US1: T011 Navbar and T013 section blocks can proceed in parallel after T007.
-- US2: T014 ProjectCard and T015 filter logic can proceed in parallel; T016 animations can parallel once card structure is ready.
-- US3: T019 ThemeToggle and T021 theme persistence can proceed in parallel; T020 styling sweep follows component availability.
+## Dependencies & Execution Order
+
+### Phase Dependencies
+- Setup (Phase 1): none
+- Foundational (Phase 2): depends on Setup; blocks all user stories
+- US1 → US2 → US3: proceed in priority order after Foundational; stories remain independently testable
+- Polish: after desired stories complete
+
+### User Story Dependencies
+- US1 (P1): starts after Foundational; no other story dependency
+- US2 (P2): starts after Foundational; independent of US1 but should reuse shared head/fonts
+- US3 (P3): starts after Foundational; ensure theme compatibility with new assets from earlier phases
+
+### Parallel Opportunities
+- Setup: T002 can run parallel to T001
+- Foundational: T003–T005 sequential; T007 can run parallel after T006 path decisions; T006 blocks page-level Helmet tasks
+- US1: T009 and T010 parallel after T006/T007; T008 before T018 styling alignment; T011 independent
+- US2: T012 and T013 can run in parallel; T014 follows T012
+- US3: T015 precedes T016; T017 parallel; T018 after T008/T016 for theme alignment
+- Polish: T019 parallel; T020 after story phases
+
+### Parallel Execution Examples
+- US1: Run T009 (Home title) and T010 (About title) in parallel while T008 updates the nav icon.
+- US2: Run T012 (icon swap) and T013 (Projects title) in parallel; finish with T014 styling check.
+- US3: Create skills data (T015) then render skills (T016); in parallel, add Contact title (T017).
 
 ## Implementation Strategy
 
-- Build MVP with US1 (loader + navigation) first to ensure page access and smooth scrolling.
-- Add project data and filtering (US2) next; integrate animations only after layout is stable.
-- Layer theme toggle and dark styles (US3); hydrate theme before paint to avoid flashes.
-- Finish with polish: accessibility/SEO checks, reduced-motion verification, dependency audit, and responsive passes.
-
+- MVP first: Complete Setup → Foundational → US1, validate navigation, titles, and social links, then proceed to US2 and US3.
+- Incremental delivery: Ship after each user story checkpoint; each remains independently testable with localized titles and theme compatibility.

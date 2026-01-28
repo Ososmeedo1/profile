@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         main: ['main', 'sans-serif'],
+        arabic: ['Playpen Sans Arabic', 'Zain', 'main', 'sans-serif'],
       },
     },
   },

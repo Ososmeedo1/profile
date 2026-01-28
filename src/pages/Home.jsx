@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { ArrowRight, ArrowLeft, Mail } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { projects } from '../data/projects';
@@ -7,6 +8,7 @@ import { certificates } from '../data/certificates';
 import { socials } from '../data/socials';
 import ProjectCard from '../Components/ProjectCard/ProjectCard';
 import CertificateCard from '../Components/CertificateCard/CertificateCard';
+import { getPageTitle } from '../lib/head';
 
 export default function Home() {
   const { language } = useLanguage();
@@ -17,9 +19,14 @@ export default function Home() {
   const summarySocials = socials.slice(0, 4); // Display first 4 social icons
 
   const ArrowIcon = language === 'ar' ? ArrowLeft : ArrowRight;
+  const pageTitle = getPageTitle('home', language);
 
   return (
     <div className="space-y-24 animate-in fade-in duration-500 pb-12">
+      <Helmet>
+        <title>{pageTitle}</title>
+      </Helmet>
+
       {/* Hero Section */}
       <section className="py-12 md:py-20">
         <div className="max-w-3xl">

@@ -1,14 +1,18 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Download } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { certificates } from '../data/certificates';
 import { identity } from '../data/identity';
 import CertificateCard from '../Components/CertificateCard/CertificateCard';
+import { getPageTitle } from '../lib/head';
+import { skills } from '../data/skills';
 
 export default function About() {
   const { language } = useLanguage();
   const location = useLocation();
+  const pageTitle = getPageTitle('about', language);
 
   // Handle hash scrolling
   useEffect(() => {
@@ -26,6 +30,10 @@ export default function About() {
 
   return (
     <div className="container mx-auto px-4 py-8 animate-in fade-in duration-500 max-w-4xl">
+      <Helmet>
+        <title>{pageTitle}</title>
+      </Helmet>
+
       <h1 className="text-4xl font-bold mb-12 text-zinc-900 dark:text-zinc-50">
         {language === 'ar' ? 'عنَّي' : 'About Me'}
       </h1>
@@ -60,8 +68,8 @@ export default function About() {
             <div className="prose dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg mb-8">
               <p>
                 {language === 'ar'
-                  ? 'مطور واجهات أمامية شغوف بإنشاء تجارب ويب تفاعلية وسهلة الاستخدام. أمتلك خبرة واسعة في React.js والنظام البيئي الحديث للويب.'
-                  : 'Passionate Frontend Developer dedicated to building interactive and user-friendly web experiences. I have extensive experience with React.js and the modern web ecosystem.'}
+                  ? 'أنا أسامة الجمل شاب عشريني دخلت كلية حاسبات و معلومات و مقيم في مصر تخصصت في ال Full-stack development و حالياً بسعي إني ابدأ أول مشروع برمجي فعلي ليا '
+                  : 'I am Osama El-Gamal, a young man in my twenties who entered the Faculty of Computer Science and resides in Egypt. I specialized in Full-stack development and am currently striving to start my first actual software project.'}
               </p>
             </div>
 
@@ -81,9 +89,25 @@ export default function About() {
         <h2 className="text-2xl font-bold mb-8 text-zinc-900 dark:text-zinc-50 border-b border-zinc-200 dark:border-zinc-800 pb-4">
           {language === 'ar' ? 'المهارات' : 'Skills'}
         </h2>
-        <p className="text-zinc-500 italic">
-          {language === 'ar' ? 'جاري العمل على هذا القسم...' : 'Work in progress...'}
-        </p>
+        <div className="space-y-8">
+          {skills.map(group => (
+            <div key={group.id} className="space-y-3">
+              <h3 className="text-lg font-semibold text-zinc-800 dark:text-zinc-200">
+                {language === 'ar' ? group.labelAr : group.labelEn}
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {group.skills.map(skill => (
+                  <span
+                    key={skill.id}
+                    className="px-4 py-2 rounded-full text-sm font-medium bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700"
+                  >
+                    {language === 'ar' ? skill.labelAr : skill.labelEn}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section id="certificates" className="mb-20 scroll-mt-24">

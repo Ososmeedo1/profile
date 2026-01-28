@@ -1,8 +1,33 @@
 @font-face {
   font-family: 'main';
-  src: url('./../public/fonts/main.ttf') format('truetype');
+  src: url('/fonts/main.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playpen Sans Arabic';
+  src: url('/fonts/PlaypenSansArabic-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playpen Sans Arabic';
+  src: url('/fonts/PlaypenSansArabic-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Zain';
+  src: url('/fonts/Zain-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 @import "tailwindcss";
@@ -14,7 +39,8 @@ body {
 }
 
 @theme {
-  --font-main: main
+  --font-main: main;
+  --font-arabic: "Playpen Sans Arabic", "Zain", main, sans-serif;
 }
 
 ::selection {

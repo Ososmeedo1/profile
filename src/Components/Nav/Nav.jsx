@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Languages } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import { useLanguage } from '../../context/LanguageContext';
 import { identity } from '../../data/identity';
+
+const LanguageGlyph = () => (
+  <Globe size={20} className="text-zinc-900 dark:text-zinc-50" />
+);
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +46,7 @@ export default function Nav() {
             className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             aria-label="Toggle Language"
           >
-            <Languages size={20} className="text-zinc-900 dark:text-zinc-50" />
+            <LanguageGlyph />
           </button>
 
           <ThemeToggle />
@@ -52,10 +56,10 @@ export default function Nav() {
         <div className="md:hidden flex items-center space-x-4 rtl:space-x-reverse text-zinc-900 dark:text-zinc-50">
           <button
             onClick={toggleLanguage}
-            className="p-2"
+            className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
             aria-label="Toggle Language"
           >
-            <span className="font-bold text-sm">{language === 'ar' ? 'EN' : 'AR'}</span>
+            <LanguageGlyph />
           </button>
 
           <ThemeToggle />

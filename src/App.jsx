@@ -13,6 +13,8 @@ function AppContent() {
   const { language } = useLanguage();
   useTheme(); // Initialize theme
 
+  const fontClass = language === 'ar' ? 'font-arabic' : 'font-main';
+
   const [isReady, setIsReady] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
 
@@ -24,7 +26,7 @@ function AppContent() {
       } else {
         window.addEventListener('load', handleLoad);
       }
-    }, 2000);
+    }, 5000);
     return () => {
       clearTimeout(timer);
       window.removeEventListener('load', handleLoad);
@@ -37,7 +39,7 @@ function AppContent() {
 
   return (
     <div
-      className="min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 font-main transition-colors duration-300"
+      className={`min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-50 transition-colors duration-300 ${fontClass}`}
       dir={language === 'ar' ? 'rtl' : 'ltr'}
     >
       {showLoader && (

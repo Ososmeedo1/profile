@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Github, Code } from 'lucide-react';
+import { ExternalLink, Code2 } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
 
 export default function ProjectCard({ project }) {
@@ -34,6 +34,7 @@ export default function ProjectCard({ project }) {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            aria-label={language === 'ar' ? 'معاينة المشروع في تبويب جديد' : 'Open live demo in a new tab'}
           >
             <ExternalLink size={18} />
             <span>{language === 'ar' ? 'معاينة' : 'Live Demo'}</span>
@@ -44,8 +45,9 @@ export default function ProjectCard({ project }) {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors"
+            aria-label={language === 'ar' ? 'عرض الكود المصدري' : 'View source code'}
           >
-            <Github size={18} />
+            <Code2 size={18} />
             <span>{language === 'ar' ? 'الكود' : 'Source Code'}</span>
           </a>
         </div>

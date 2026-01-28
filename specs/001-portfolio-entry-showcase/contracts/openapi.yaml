@@ -1,0 +1,9 @@
+openapi: 3.0.3
+info:
+  title: Portfolio SPA (Client-Only)
+  version: 1.0.0
+  description: |
+    This feature introduces no network API changes. All enhancements (icons, fonts, language toggle, SEO titles,
+    skills display) operate entirely on the client within the existing SPA.
+paths: {}
+components: {}

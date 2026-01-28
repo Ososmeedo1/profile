@@ -1,11 +1,14 @@
 import React, { useState, useMemo } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '../context/LanguageContext';
 import { projects } from '../data/projects';
 import ProjectCard from '../Components/ProjectCard/ProjectCard';
+import { getPageTitle } from '../lib/head';
 
 export default function Projects() {
   const { language } = useLanguage();
   const [filter, setFilter] = useState('All');
+  const pageTitle = getPageTitle('projects', language);
 
   const categories = useMemo(() => {
     return [
@@ -22,6 +25,10 @@ export default function Projects() {
 
   return (
     <div className="container mx-auto px-4 animate-in fade-in duration-500">
+      <Helmet>
+        <title>{pageTitle}</title>
+      </Helmet>
+
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-4 text-zinc-900 dark:text-zinc-50">
           {language === 'ar' ? 'مشاريعي' : 'My Projects'}
@@ -40,8 +47,8 @@ export default function Projects() {
             key={cat.id}
             onClick={() => setFilter(cat.id)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${filter === cat.id
-                ? 'bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-900 shadow-md transform scale-105'
-                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
+              ? 'bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-900 shadow-md transform scale-105'
+              : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
               }`}
           >
             {language === 'ar' ? cat.labelAr : cat.labelEn}
