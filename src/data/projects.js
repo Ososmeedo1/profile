@@ -42,9 +42,9 @@ export const projects = [
     descriptionEn: 'Real-time weather application using external APIs',
     descriptionAr: 'مشروع لعرض بيانات الطقس',
     category: 'Frontend',
-    image: '/images/weather.png',
-    demoUrl: 'https://ososmeedo1.github.io/weather-project',
-    codeUrl: 'https://github.com/Ososmeedo1/weather-project',
+    image: '/images/weather-cast0.gif',
+    demoUrl: 'https://weather-cast0.netlify.app',
+    codeUrl: 'https://github.com/Ososmeedo1/weather-cast',
     featured: false
   },
   {
