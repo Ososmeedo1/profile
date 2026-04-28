@@ -49,6 +49,18 @@ export const projects = [
   },
   {
     id: 5,
+    titleEn: "Tourism Company's ERP System",
+    titleAr: 'نظام تخطيط موارد مؤسسة السياحة',
+    descriptionEn: 'A modern admin dashboard for managing helpers, bookings, and platform analytics. Built with React, Tailwind CSS, and charting libraries. Features real-time metrics, user management, and a clean UI.',
+    descriptionAr: 'لوحة تحكم حديثة لإدارة المساعدين والحجوزات وتحليلات المنصة. مبنية باستخدام React وTailwind CSS ومكتبات الرسوم البيانية. تشمل مؤشرات لحظية وإدارة المستخدمين وواجهة استخدام أنيقة.',
+    category: 'Frontend',
+    image: '/src/assets/Screenshot_20260429_002337.png',
+    demoUrl: 'https://tourismgp.netlify.app',
+    codeUrl: 'https://github.com/Ososmeedo1/college_graduation_project',
+    featured: true
+  },
+  {
+    id: 5,
     titleEn: 'Food Recipes',
     titleAr: 'وصفات الطعام',
     descriptionEn: 'Project for food recipes using pure HTML, CSS, and JavaScript.',
