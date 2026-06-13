@@ -41,9 +41,9 @@ export const socials = [
     id: 'youtube',
     nameEn: 'YouTube',
     nameAr: 'يوتيوب',
-    url: 'https://www.youtube.com/@code2210',
+    url: 'https://www.youtube.com/@masar1424',
     icon: Youtube,
     color: 'text-red-600 dark:text-red-500',
-    display: '@osama-code'
+    display: '@masar1424'
   }
 ];
