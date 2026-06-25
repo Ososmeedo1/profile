@@ -7,7 +7,7 @@ export const projects = [
     descriptionAr: 'نموذج متجر إلكتروني (غير حقيقي).',
     category: 'Frontend',
     image: '/images/ecommerce.png',
-    demoUrl: 'https://ososmeedo22.netlify.app',
+    demoUrl: 'https://ecommerce-3d5.pages.dev',
     codeUrl: 'https://github.com/Ososmeedo1/ecommerce',
     featured: true
   },
@@ -19,7 +19,7 @@ export const projects = [
     descriptionAr: 'تطبيق بسيط لإدارة المهام',
     category: 'Frontend',
     image: '/images/notice.png',
-    demoUrl: 'https://ososmeedo.netlify.app',
+    demoUrl: 'https://notes-3xx.pages.dev',
     codeUrl: 'https://github.com/Ososmeedo1/notes',
     featured: true
   },
@@ -43,7 +43,7 @@ export const projects = [
     descriptionAr: 'مشروع لعرض بيانات الطقس',
     category: 'Frontend',
     image: '/images/weather-cast0.gif',
-    demoUrl: 'https://weather-cast0.netlify.app',
+    demoUrl: 'https://weather-cast-92z.pages.dev',
     codeUrl: 'https://github.com/Ososmeedo1/weather-cast',
     featured: false
   },
@@ -55,12 +55,12 @@ export const projects = [
     descriptionAr: 'لوحة تحكم حديثة لإدارة المساعدين والحجوزات وتحليلات المنصة. مبنية باستخدام React وTailwind CSS ومكتبات الرسوم البيانية. تشمل مؤشرات لحظية وإدارة المستخدمين وواجهة استخدام أنيقة.',
     category: 'Frontend',
     image: '/src/assets/Screenshot_20260429_002337.png',
-    demoUrl: 'https://tourismgp.netlify.app',
+    demoUrl: 'https://graduationproject-7p1.pages.dev',
     codeUrl: 'https://github.com/Ososmeedo1/college_graduation_project',
     featured: true
   },
   {
-    id: 5,
+    id: 6,
     titleEn: 'Food Recipes',
     titleAr: 'وصفات الطعام',
     descriptionEn: 'Project for food recipes using pure HTML, CSS, and JavaScript.',
@@ -69,18 +69,6 @@ export const projects = [
     image: '/images/food.png',
     demoUrl: 'https://ososmeedo1.github.io/food',
     codeUrl: 'https://github.com/Ososmeedo1/food',
-    featured: false
-  },
-  {
-    id: 6,
-    titleEn: 'Restaurant Website',
-    titleAr: 'موقع مطعم',
-    descriptionEn: 'Simple restaurant website UI project',
-    descriptionAr: 'مشروع واجهة مستخدم بسيطة لموقع مطعم',
-    category: 'Frontend',
-    image: '/images/restaurant.png',
-    demoUrl: 'https://restaurant22.netlify.app',
-    codeUrl: 'https://github.com/Ososmeedo1/Restaurant',
     featured: false
   },
   {
