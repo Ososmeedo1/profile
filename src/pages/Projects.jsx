@@ -24,7 +24,7 @@ export default function Projects() {
   }, [filter]);
 
   return (
-    <div className="container mx-auto px-4 animate-in fade-in duration-500">
+    <div className="animate-in fade-in duration-500">
       <Helmet>
         <title>{pageTitle}</title>
       </Helmet>
@@ -64,7 +64,7 @@ export default function Projects() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-20 bg-zinc-50 dark:bg-zinc-900/50 rounded-xl border-dashed border-2 border-zinc-200 dark:border-zinc-800">
+        <div className="text-center py-12 md:py-20 bg-zinc-50 dark:bg-zinc-900/50 rounded-xl border-dashed border-2 border-zinc-200 dark:border-zinc-800">
           <p className="text-zinc-500">
             {language === 'ar' ? 'لا توجد مشاريع في هذه الفئة حالياً.' : 'No projects found in this category yet.'}
           </p>

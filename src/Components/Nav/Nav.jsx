@@ -25,7 +25,7 @@ export default function Nav() {
   return (
     <nav className="fixed top-0 left-0 w-full z-40 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-300">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-50">
+        <Link to="/" className="text-lg md:text-xl font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-50 truncate max-w-[50vw]">
           {language === 'ar' ? identity.nameAr : identity.nameEn}
         </Link>
 
@@ -78,7 +78,7 @@ export default function Nav() {
               key={link.path}
               to={link.path}
               onClick={() => setIsOpen(false)}
-              className={`text-sm uppercase tracking-wide py-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors ${location.pathname === link.path ? 'font-bold text-zinc-900 dark:text-zinc-50' : ''}`}
+              className={`text-sm uppercase tracking-wide py-3 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors ${location.pathname === link.path ? 'font-bold text-zinc-900 dark:text-zinc-50' : ''}`}
             >
               {language === 'ar' ? link.nameAr : link.nameEn}
             </Link>

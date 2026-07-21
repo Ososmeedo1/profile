@@ -22,7 +22,7 @@ export default function Home() {
   const pageTitle = getPageTitle('home', language);
 
   return (
-    <div className="space-y-24 animate-in fade-in duration-500 pb-12">
+    <div className="space-y-16 md:space-y-24 animate-in fade-in duration-500 pb-12">
       <Helmet>
         <title>{pageTitle}</title>
       </Helmet>
@@ -33,7 +33,7 @@ export default function Home() {
           <p className="text-zinc-500 dark:text-zinc-400 font-medium tracking-wide uppercase mb-4">
             {language === 'ar' ? 'مهندس برمجيات' : 'Full Stack Developer'}
           </p>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-zinc-900 dark:text-zinc-50 leading-tight">
+          <h1 className="text-[clamp(2rem,6vw,4.5rem)] font-bold mb-6 text-zinc-900 dark:text-zinc-50 leading-tight">
             {language === 'ar' ? 'البرمجة في مسارها الجديد' : 'Coding in its New Path'}
           </h1>
           <p className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8 max-w-2xl">
@@ -147,7 +147,7 @@ export default function Home() {
               : 'Interested in discussing a project or opportunity? I\'m available to chat.'}
           </p>
 
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4 items-center">
             {summarySocials.map(social => {
               const Icon = social.icon;
               return (

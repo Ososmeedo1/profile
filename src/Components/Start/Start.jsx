@@ -41,8 +41,8 @@ export default function Start() {
         <div ref={osama} className="me bg-[#1E1E1E] rounded-4xl px-3 py-1">
           <h2 >I am Osama 👋</h2>
         </div>
-        <div className="caption flex justify-center text-center max-sm:p-5">
-          <h2 ref={main} className='font-main capitalize bg-linear-to-br from-blue-400 to-blue-100 bg-clip-text text-transparent max-sm:text-7xl sm:text-7xl md:text-8xl md:w-3xl'>I'm full-stack web developer</h2>
+        <div className="caption flex justify-center text-center max-sm:p-5 w-full">
+          <h2 ref={main} className='font-main capitalize bg-linear-to-br from-blue-400 to-blue-100 bg-clip-text text-transparent text-[clamp(2.25rem,7vw,5rem)] max-w-full leading-tight'>I'm full-stack web developer</h2>
         </div>
         <div className="email" ref={email}>
           <Link to={'https://mail.google.com/mail/?view=cm&fs=1&to=ososmeedo@gmail.com'} target="_blank" className="group flex items-center gap-2 border border-white/50 rounded-full bg-transparent px-6 py-2 text-white font-medium hover:bg-white hover:text-slate-950 transition-colors duration-300"><span>Email me</span><FiArrowUpRight className="text-xl transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></Link>

@@ -28,7 +28,7 @@ export default function ProjectCard({ project }) {
           {language === 'ar' ? descriptionAr : descriptionEn}
         </p>
 
-        <div className="flex items-center gap-4 mt-auto pt-4 border-t border-zinc-100 dark:border-zinc-800">
+        <div className="flex items-center gap-4 mt-auto pt-4 border-t border-zinc-100 dark:border-zinc-800 flex-wrap">
           <a
             href={demoUrl}
             target="_blank"

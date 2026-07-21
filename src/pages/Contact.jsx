@@ -11,7 +11,7 @@ export default function Contact() {
   const pageTitle = getPageTitle('contact', language);
 
   return (
-    <div className="container mx-auto px-4 py-8 animate-in fade-in duration-500 max-w-3xl">
+    <div className="animate-in fade-in duration-500 max-w-3xl mx-auto">
       <Helmet>
         <title>{pageTitle}</title>
       </Helmet>
@@ -48,8 +48,8 @@ export default function Contact() {
                 <Icon size={32} />
               </div>
 
-              <div className="flex-grow px-6">
-                <h3 className="font-bold text-lg text-zinc-900 dark:text-zinc-50 mb-1">
+              <div className="flex-grow min-w-0 px-4 md:px-6">
+                <h3 className="font-bold text-base md:text-lg text-zinc-900 dark:text-zinc-50 mb-1">
                   {language === 'ar' ? social.nameAr : social.nameEn}
                 </h3>
                 <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium tracking-wide">

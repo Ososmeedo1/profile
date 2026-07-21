@@ -29,7 +29,7 @@ export default function About() {
   }, [location]);
 
   return (
-    <div className="container mx-auto px-4 py-8 animate-in fade-in duration-500 max-w-4xl">
+    <div className="animate-in fade-in duration-500 max-w-4xl mx-auto">
       <Helmet>
         <title>{pageTitle}</title>
       </Helmet>
