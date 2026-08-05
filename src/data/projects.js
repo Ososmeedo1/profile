@@ -61,6 +61,18 @@ export const projects = [
   },
   {
     id: 6,
+    titleEn: "Workstation ERP System",
+    titleAr: 'نظام لإدارة مساحات العمل',
+    descriptionEn: 'A modern full-stack ERP system for managing workstations, bookings, and platform analytics. Built with React, Tailwind CSS, Node.js, Express, and MongoDB. Features real-time metrics, user management, and a clean UI.',
+    descriptionAr: 'نظام ERP حديث لإدارة مساحات العمل والحجوزات وتحليلات المنصة. مبني باستخدام React وTailwind CSS وNode.js وExpress وMongoDB. يشمل مؤشرات لحظية وإدارة المستخدمين وواجهة استخدام أنيقة.',
+    category: 'Frontend',
+    image: '/src/assets/Screenshot_2026-08-05_043354.png',
+    demoUrl: 'https://workstation.osamaoriginal77.workers.dev/',
+    codeUrl: 'https://github.com/Ososmeedo1/workstation_ERP_Backend',
+    featured: true
+  },
+  {
+    id: 7,
     titleEn: 'Food Recipes',
     titleAr: 'وصفات الطعام',
     descriptionEn: 'Project for food recipes using pure HTML, CSS, and JavaScript.',
@@ -72,7 +84,7 @@ export const projects = [
     featured: false
   },
   {
-    id: 7,
+    id: 8,
     titleEn: 'Job-search Backend APIs',
     titleAr: 'نظام واجهة خلفية للبحث عن الوظائف',
     descriptionEn: 'Backend APIs for a job-search application using Node.js, Express, Mongoose and MongoDB.',
@@ -84,7 +96,7 @@ export const projects = [
     featured: true
   },
   {
-    id: 8,
+    id: 9,
     titleEn: 'Library System',
     titleAr: 'نظام مكتبة',
     descriptionEn: 'Simple library management system using Node.js, Express, and MongoDB.',
