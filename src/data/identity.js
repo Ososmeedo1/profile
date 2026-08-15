@@ -6,7 +6,7 @@ export const identity = {
   titleEn: 'Full Stack Developer',
   titleAr: 'مهندس برمجيات',
   email: 'ososmeedo@gmail.com',
-  cvUrl: 'https://drive.google.com/file/d/1Ik7g1SbMjRWkVvQqjWRl6O6Yo668rwRl/view?usp=drive_link', // Assumes file is in public/cv.pdf
+  cvUrl: '/cv.pdf', // Local copy — public/cv.pdf
   cvLabelEn: 'Download Resume',
   cvLabelAr: 'تحميل السيرة الذاتية',
   locationEn: 'Cairo, Egypt',
