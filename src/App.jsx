@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import { LanguageProvider } from './context/LanguageContext';
+import { useLanguage } from './hooks/useLanguage';
 import { useTheme } from './hooks/useTheme';
 import LoadingScreen from './Components/LoadingScreen/LoadingScreen';
 import Nav from './Components/Nav/Nav';

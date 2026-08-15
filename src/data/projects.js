@@ -54,7 +54,7 @@ export const projects = [
     descriptionEn: 'A modern admin dashboard for managing helpers, bookings, and platform analytics. Built with React, Tailwind CSS, and charting libraries. Features real-time metrics, user management, and a clean UI.',
     descriptionAr: 'لوحة تحكم حديثة لإدارة المساعدين والحجوزات وتحليلات المنصة. مبنية باستخدام React وTailwind CSS ومكتبات الرسوم البيانية. تشمل مؤشرات لحظية وإدارة المستخدمين وواجهة استخدام أنيقة.',
     category: 'Frontend',
-    image: '/src/assets/Screenshot_20260429_002337.png',
+    image: '/images/Screenshot_20260429_002337.png',
     demoUrl: 'https://graduationproject-7p1.pages.dev',
     codeUrl: 'https://github.com/Ososmeedo1/college_graduation_project',
     featured: true
@@ -66,7 +66,7 @@ export const projects = [
     descriptionEn: 'A modern full-stack ERP system for managing workstations, bookings, and platform analytics. Built with React, Tailwind CSS, Node.js, Express, and MongoDB. Features real-time metrics, user management, and a clean UI.',
     descriptionAr: 'نظام ERP حديث لإدارة مساحات العمل والحجوزات وتحليلات المنصة. مبني باستخدام React وTailwind CSS وNode.js وExpress وMongoDB. يشمل مؤشرات لحظية وإدارة المستخدمين وواجهة استخدام أنيقة.',
     category: 'Frontend',
-    image: '/src/assets/Screenshot_2026-08-05_043354.png',
+    image: '/images/Screenshot_2026-08-05_043354.png',
     demoUrl: 'https://workstation.osamaoriginal77.workers.dev/',
     codeUrl: 'https://github.com/Ososmeedo1/workstation_ERP_Backend',
     featured: true
@@ -103,7 +103,7 @@ export const projects = [
     descriptionAr: 'نظام بسيط لإدارة المكتبة باستخدام Node.js, Express, و MongoDB.',
     category: 'Backend',
     image: '/images/library.png',
-    demoUrl: 'https://example.com',
+    demoUrl: null,
     codeUrl: 'https://github.com/Ososmeedo1/library',
     featured: false
   }

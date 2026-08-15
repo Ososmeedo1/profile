@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Globe } from 'lucide-react';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '../../hooks/useLanguage';
 import { identity } from '../../data/identity';
 
 const LanguageGlyph = () => (
-  <Globe size={20} className="text-zinc-900 dark:text-zinc-50" />
+  <Globe size={16} />
 );
+
+const iconBtn =
+    'p-2 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-50 hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-zinc-900 transition-colors';
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +18,7 @@ export default function Nav() {
   const location = useLocation();
 
   const links = [
-    { nameEn: 'About', nameAr: 'عنَّي', path: '/about' },
+    { nameEn: 'About', nameAr: 'عنّي', path: '/about' },
     { nameEn: 'Projects', nameAr: 'مشاريعي', path: '/projects' },
     { nameEn: 'Contact', nameAr: 'تواصل معي', path: '/contact' }
   ];
@@ -23,19 +26,23 @@ export default function Nav() {
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-40 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-300">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <Link to="/" className="text-lg md:text-xl font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-50 truncate max-w-[50vw]">
+    <nav className="fixed top-0 left-0 w-full z-40 bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800">
+      <div className="mx-auto px-6 h-16 flex items-center justify-between max-w-7xl">
+        <Link to="/" className="text-base font-bold uppercase tracking-[0.15em] text-zinc-900 dark:text-zinc-50 truncate max-w-[50vw]">
           {language === 'ar' ? identity.nameAr : identity.nameEn}
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
+        <div className="hidden md:flex items-center gap-8 rtl:gap-8">
           {links.map(link => (
             <Link
               key={link.path}
               to={link.path}
-              className={`text-sm uppercase tracking-wide text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors ${location.pathname === link.path ? 'font-bold text-zinc-900 dark:text-zinc-50' : ''}`}
+              className={`text-xs uppercase tracking-[0.2em] transition-colors ${
+                location.pathname === link.path
+                  ? 'text-zinc-900 dark:text-zinc-50 font-bold underline underline-offset-8'
+                  : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50'
+              }`}
             >
               {language === 'ar' ? link.nameAr : link.nameEn}
             </Link>
@@ -43,7 +50,7 @@ export default function Nav() {
 
           <button
             onClick={toggleLanguage}
-            className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            className={iconBtn}
             aria-label="Toggle Language"
           >
             <LanguageGlyph />
@@ -53,10 +60,10 @@ export default function Nav() {
         </div>
 
         {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center space-x-4 rtl:space-x-reverse text-zinc-900 dark:text-zinc-50">
+        <div className="md:hidden flex items-center gap-4 rtl:gap-4">
           <button
             onClick={toggleLanguage}
-            className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+            className={iconBtn}
             aria-label="Toggle Language"
           >
             <LanguageGlyph />
@@ -64,21 +71,25 @@ export default function Nav() {
 
           <ThemeToggle />
 
-          <button onClick={toggleMenu} aria-label="Toggle Menu">
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          <button onClick={toggleMenu} aria-label="Toggle Menu" className="p-2 border border-zinc-200 dark:border-zinc-800">
+            {isOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="md:hidden absolute top-16 left-0 w-full bg-white dark:bg-zinc-950 border-b border-zinc-200 dark:border-zinc-800 p-4 flex flex-col space-y-4 shadow-lg">
+        <div className="md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
           {links.map(link => (
             <Link
               key={link.path}
               to={link.path}
               onClick={() => setIsOpen(false)}
-              className={`text-sm uppercase tracking-wide py-3 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50 transition-colors ${location.pathname === link.path ? 'font-bold text-zinc-900 dark:text-zinc-50' : ''}`}
+              className={`block px-6 py-4 text-sm uppercase tracking-[0.2em] border-b border-zinc-100 dark:border-zinc-900 ${
+                location.pathname === link.path
+                  ? 'font-bold text-zinc-900 dark:text-zinc-50'
+                  : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-50'
+              }`}
             >
               {language === 'ar' ? link.nameAr : link.nameEn}
             </Link>

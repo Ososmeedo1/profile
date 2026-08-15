@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import { projects } from '../data/projects';
 import ProjectCard from '../Components/ProjectCard/ProjectCard';
 import { getPageTitle } from '../lib/head';
@@ -24,13 +24,13 @@ export default function Projects() {
   }, [filter]);
 
   return (
-    <div className="animate-in fade-in duration-500">
+    <div>
       <Helmet>
         <title>{pageTitle}</title>
       </Helmet>
 
-      <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4 text-zinc-900 dark:text-zinc-50">
+      <div className="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800 mb-12">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-zinc-900 dark:text-zinc-50">
           {language === 'ar' ? 'مشاريعي' : 'My Projects'}
         </h1>
         <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl">
@@ -41,15 +41,17 @@ export default function Projects() {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-wrap gap-2 mb-8">
+      <div className="flex flex-wrap gap-3 mb-12">
         {categories.map(cat => (
           <button
             key={cat.id}
             onClick={() => setFilter(cat.id)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${filter === cat.id
-              ? 'bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-900 shadow-md transform scale-105'
-              : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-700'
-              }`}
+            className={`px-5 py-2 text-xs uppercase tracking-[0.2em] font-bold border transition-colors ${
+              filter === cat.id
+                ? 'bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-900 border-zinc-900 dark:border-zinc-50'
+                : 'bg-transparent border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-zinc-900 dark:hover:border-zinc-50 hover:text-zinc-900 dark:hover:text-zinc-50'
+            }`}
+            aria-pressed={filter === cat.id}
           >
             {language === 'ar' ? cat.labelAr : cat.labelEn}
           </button>
@@ -64,10 +66,16 @@ export default function Projects() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-12 md:py-20 bg-zinc-50 dark:bg-zinc-900/50 rounded-xl border-dashed border-2 border-zinc-200 dark:border-zinc-800">
-          <p className="text-zinc-500">
+        <div className="text-center py-16 border border-dashed border-zinc-300 dark:border-zinc-700">
+          <p className="text-zinc-500 dark:text-zinc-400">
             {language === 'ar' ? 'لا توجد مشاريع في هذه الفئة حالياً.' : 'No projects found in this category yet.'}
           </p>
+          <button
+            onClick={() => setFilter('All')}
+            className="mt-6 px-5 py-2 text-xs uppercase tracking-[0.2em] font-bold border border-zinc-300 dark:border-zinc-700 hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-zinc-900 transition-colors"
+          >
+            {language === 'ar' ? 'عرض الكل' : 'View All'}
+          </button>
         </div>
       )}
     </div>

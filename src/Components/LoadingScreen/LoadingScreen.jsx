@@ -13,7 +13,6 @@ export default function LoadingScreen({ isReady, onComplete }) {
       return;
     }
 
-    // Intro animation
     gsap.fromTo(textRef.current,
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }
@@ -27,7 +26,6 @@ export default function LoadingScreen({ isReady, onComplete }) {
         return;
       }
 
-      // Exit animation
       const tl = gsap.timeline({
         onComplete: onComplete
       });
@@ -42,12 +40,13 @@ export default function LoadingScreen({ isReady, onComplete }) {
   }, [isReady, onComplete, prefersReducedMotion]);
 
   return (
-    <div ref={containerRef} className="fixed inset-0 flex items-center justify-center bg-zinc-900 text-white z-50 p-4">
-      <div ref={textRef} className="flex flex-col items-center text-center space-y-6 max-w-2xl">
-        <p className="font-main font-bold text-lg md:text-2xl text-zinc-300 leading-relaxed" dir="rtl">
+    <div ref={containerRef} className="fixed inset-0 flex items-center justify-center bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-50 z-50 p-6">
+      <div ref={textRef} className="flex flex-col items-center text-center space-y-8 max-w-2xl">
+        <p className="text-2xl md:text-4xl font-bold uppercase tracking-[0.2em]">Osama</p>
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed" dir="rtl">
           لما تيجي تدخل هتلاقي الموقع الخاص بيا باللغة العربية بشكل إفتراضي و ده محاولة مني للحفاظ علي الهوية العربية
         </p>
-        <p className="font-arabic text-lg md:text-2xl text-zinc-300 leading-relaxed">
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
           When you enter, you will find the site in Arabic by default — an attempt to preserve the Arab identity.
           If you cannot read Arabic, you can switch to English using the language toggle in the top left corner.
         </p>

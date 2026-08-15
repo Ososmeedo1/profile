@@ -1,11 +1,9 @@
-import { createContext, useContext, useState, useEffect } from 'react';
-
-const LanguageContext = createContext();
+import { useState, useEffect } from 'react';
+import { LanguageContext } from './language-context';
 
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
     const saved = localStorage.getItem('language');
-    // Default to 'ar' if not explicitly 'en'
     return saved === 'en' ? 'en' : 'ar';
   });
 
@@ -25,12 +23,4 @@ export const LanguageProvider = ({ children }) => {
       {children}
     </LanguageContext.Provider>
   );
-};
-
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
 };

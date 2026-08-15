@@ -62,5 +62,5 @@ body {
 }
 
 ::selection {
-  @apply bg-green-600 text-yellow-400
+  @apply bg-zinc-900 text-white dark:bg-zinc-50 dark:text-zinc-900
 }

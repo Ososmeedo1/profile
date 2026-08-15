@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../hooks/useLanguage';
 import { socials } from '../data/socials';
 import { identity } from '../data/identity';
 import { ExternalLink } from 'lucide-react';
@@ -11,16 +11,19 @@ export default function Contact() {
   const pageTitle = getPageTitle('contact', language);
 
   return (
-    <div className="animate-in fade-in duration-500 max-w-3xl mx-auto">
+    <div className="max-w-3xl mx-auto">
       <Helmet>
         <title>{pageTitle}</title>
       </Helmet>
 
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-zinc-900 dark:text-zinc-50">
+      <div className="py-12 md:py-16 border-b border-zinc-200 dark:border-zinc-800 mb-12 text-center">
+        <p className="text-xs uppercase tracking-[0.25em] font-bold text-zinc-500 dark:text-zinc-400 mb-6">
+          {language === 'ar' ? 'التواصل' : 'Contact'}
+        </p>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-zinc-900 dark:text-zinc-50">
           {language === 'ar' ? 'تواصل معي' : 'Get in Touch'}
         </h1>
-        <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed mb-6">
+        <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed">
           {language === 'ar'
             ? 'هل لديك فكرة مشروع أو ترغب في مناقشة فرصة عمل؟ لا تتردد في التحدث مع '
             : 'Have a project idea or want to discuss a job opportunity? Feel free to chat with '}
@@ -33,7 +36,7 @@ export default function Contact() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="border border-zinc-200 dark:border-zinc-800 divide-y divide-zinc-200 dark:divide-zinc-800">
         {socials.map((social) => {
           const Icon = social.icon;
           return (
@@ -42,32 +45,32 @@ export default function Contact() {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center p-6 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-md transition-all duration-300"
+              className="group flex items-center p-5 md:p-6 hover:bg-zinc-900 hover:text-white dark:hover:bg-white dark:hover:text-zinc-900 transition-colors"
             >
-              <div className={`p-4 rounded-xl bg-zinc-50 dark:bg-zinc-800 ${social.color} group-hover:scale-110 transition-transform duration-300`}>
-                <Icon size={32} />
+              <div className={`p-3 ${social.color} group-hover:text-white dark:group-hover:text-zinc-900 transition-colors`}>
+                <Icon size={22} />
               </div>
 
               <div className="flex-grow min-w-0 px-4 md:px-6">
-                <h3 className="font-bold text-base md:text-lg text-zinc-900 dark:text-zinc-50 mb-1">
+                <h3 className="font-bold text-base md:text-lg mb-1">
                   {language === 'ar' ? social.nameAr : social.nameEn}
                 </h3>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium tracking-wide">
+                <p className="text-sm text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-300 dark:group-hover:text-zinc-600 transition-colors">
                   {social.display}
                 </p>
               </div>
 
               <ExternalLink
-                size={20}
-                className="text-zinc-300 dark:text-zinc-600 group-hover:text-zinc-900 dark:group-hover:text-zinc-100 transition-colors rtl:rotate-180"
+                size={18}
+                className="text-zinc-300 dark:text-zinc-600 group-hover:text-zinc-900 dark:group-hover:text-zinc-50 transition-colors rtl:rotate-180"
               />
             </a>
           );
         })}
       </div>
 
-      <div className="mt-16 text-center p-8 bg-zinc-50 dark:bg-zinc-900/50 rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-800">
-        <p className="text-zinc-600 dark:text-zinc-400">
+      <div className="mt-12 p-8 text-center border border-zinc-200 dark:border-zinc-800">
+        <p className="text-xs uppercase tracking-[0.25em] font-bold text-zinc-500 dark:text-zinc-400">
           {language === 'ar'
             ? 'متاح حالياً للعمل الحر والمشاريع الكاملة.'
             : 'Currently available for freelance work and full-time opportunities.'}
